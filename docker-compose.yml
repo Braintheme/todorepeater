@@ -1,0 +1,42 @@
+version: "3.8"
+services:
+  backend:
+    build:
+      context: ./backend
+      target: dev
+    ports:
+      - '3000:3000'
+    expose:
+      - '3000'
+    command: ['sh', '-c', 'pnpm start:dev']
+    volumes:
+      - ./backend/src:/usr/src/backend/src
+    env_file:
+      - ./backend/.env
+    depends_on:
+      mysql:
+        condition: service_healthy
+  mysql:
+    image: mysql:8.4
+    restart: always
+    command:
+      --mysql-native-password=ON
+      --sort_buffer_size=10M
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: todo
+      MYSQL_USER: todo
+      MYSQL_PASSWORD: password
+    healthcheck:
+      test: ['CMD-SHELL', 'mysqladmin ping -h 127.0.0.1 --password=password --silent']
+      interval: 3s
+      retries: 5
+      start_period: 30s
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - ./docker/mysql/data:/var/lib/mysql
+
+  
