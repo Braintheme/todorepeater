@@ -5,9 +5,12 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
+  BeforeInsert,
+  BeforeUpdate,
 } from 'typeorm';
 import { TodoEntity } from '@modules/todo/todo.entity';
 import { CategoryEntity } from '@modules/category/category.entity';
+import { hash } from 'bcrypt';
 
 @Entity({ name: 'users' })
 export class UserEntity {
@@ -37,4 +40,10 @@ export class UserEntity {
 
   @OneToMany(() => TodoEntity, (todo) => todo.user)
   public todos: TodoEntity[];
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  async hashPassword(): Promise<void> {
+    this.password = await hash(this.password, 10);
+  }
 }

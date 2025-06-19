@@ -1,7 +1,16 @@
-import { Controller, Get, Param, NotFoundException } from '@nestjs/common';
-import { ApiTags, ApiResponse, ApiParam } from '@nestjs/swagger';
+import {
+  Controller,
+  Get,
+  Post,
+  Param,
+  Body,
+  NotFoundException,
+} from '@nestjs/common';
+import { ApiTags, ApiResponse, ApiParam, ApiOperation } from '@nestjs/swagger';
 import { UserDto } from '@modules/user/dto/user.dto';
 import { UserService } from '@modules/user/user.service';
+import { UserEntity } from '@modules/user/user.entity';
+import { CreateUserDto } from '@modules/user/dto/create-user.dto';
 
 @ApiTags('Users')
 @Controller('users')
