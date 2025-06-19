@@ -15,28 +15,28 @@ import { hash } from 'bcrypt';
 @Entity({ name: 'users' })
 export class UserEntity {
   @PrimaryGeneratedColumn()
-  id: number;
+  public id: number;
 
   @Column()
-  email: string;
+  public email: string;
 
-  @Column({ select: false })
-  password: string;
+  @Column({ name: 'password' })
+  public password: string;
 
   @Column({ name: 'first_name', nullable: true })
-  firstName: string;
+  public firstName: string;
 
   @Column({ name: 'last_name', nullable: true })
-  lastName: string;
+  public lastName: string;
 
   @CreateDateColumn({ name: 'created_at' })
-  createdAt: Date;
+  public createdAt: Date;
 
   @UpdateDateColumn({ name: 'updated_at' })
-  updatedAt: Date;
+  public updatedAt: Date;
 
   @OneToMany(() => CategoryEntity, (category) => category.user)
-  categories: CategoryEntity[];
+  public categories: CategoryEntity[];
 
   @OneToMany(() => TodoEntity, (todo) => todo.user)
   public todos: TodoEntity[];

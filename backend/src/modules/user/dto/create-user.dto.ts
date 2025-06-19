@@ -9,7 +9,7 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateUserDto {
   @ApiProperty({
-    example: 'admin@gmail.com',
+    example: 'user@user.com',
     description: 'admin email for auth',
   })
   @IsNotEmpty()

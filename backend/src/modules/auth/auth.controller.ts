@@ -9,7 +9,7 @@ export class AuthController {
 
   @Post('login')
   login(@Body() authDto: AuthDto) {
-    return this.authService.sighIn();
+    return this.authService.signIn(authDto);
   }
 
   @Post('register')
