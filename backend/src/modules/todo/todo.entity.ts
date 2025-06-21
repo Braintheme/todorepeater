@@ -10,23 +10,29 @@ import {
 import { RepeatType } from '@modules/todo/enums/repeat-type.enum';
 import { UserEntity } from '@modules/user/user.entity';
 import { CategoryEntity } from '@modules/category/category.entity';
+import { RepeatUnit } from '@modules/todo/enums/repeat-unit.enum';
 
 @Entity({ name: 'todos' })
 export class TodoEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'varchar', length: 255, nullable: true })
+  @Column({ type: 'varchar', length: 255, nullable: false })
   title: string;
 
-  @Column({ type: 'enum', enum: RepeatType, default: RepeatType.Once })
-  repeat_type: RepeatType;
+  @Column({ type: 'int', name: 'repeat_value', nullable: true })
+  repeatValue: number;
+
+  @Column({
+    type: 'enum',
+    enum: RepeatUnit,
+    name: 'repeat_unit',
+    nullable: true,
+  })
+  repeatUnit: RepeatUnit;
 
   @Column({ type: 'boolean', default: false, name: 'is_archived' })
   isArchived: boolean;
-
-  @Column({ type: 'boolean', default: false, name: 'is_deleted' })
-  isDeleted: boolean;
 
   @Column({ type: 'varchar', length: 20, nullable: true })
   color: string;
