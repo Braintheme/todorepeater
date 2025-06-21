@@ -5,14 +5,12 @@ import {
   ManyToOne,
   JoinColumn,
   Unique,
-  Index,
 } from 'typeorm';
 import { UserEntity } from '@modules/user/user.entity';
 import { TodoEntity } from '@modules/todo/todo.entity';
 
 @Entity('completions')
-@Unique(['user', 'task', 'date'])
-@Index(['user', 'task', 'date'])
+@Unique(['user', 'todo', 'date'])
 export class CompletionEntity {
   @PrimaryGeneratedColumn()
   id: number;
@@ -22,8 +20,8 @@ export class CompletionEntity {
   user: UserEntity;
 
   @ManyToOne(() => TodoEntity, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'task_id' })
-  task: TodoEntity;
+  @JoinColumn({ name: 'todo_id' })
+  todo: TodoEntity;
 
   @Column({ type: 'date' })
   date: string;
