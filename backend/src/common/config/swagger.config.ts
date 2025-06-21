@@ -3,7 +3,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 export function setupSwagger(app: INestApplication): void {
   const config = new DocumentBuilder()
-    .setTitle(`${process.env.PROJECT_NAME || 'TodoRepeater'} CRM API`)
+    .setTitle(`${process.env.PROJECT_NAME || 'TodoRepeater'} API`)
     .setDescription('Backend API endpoints')
     .setVersion('1.0')
     .addBearerAuth()

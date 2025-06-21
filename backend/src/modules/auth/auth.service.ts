@@ -31,7 +31,6 @@ export class AuthService {
 
   async signIn(authData: AuthDto): Promise<{ access_token: string }> {
     const user = await this.userService.findByEmail(authData.email);
-    console.log(authData.password, user?.password);
 
     if (!user || !(await compare(authData.password, user.password))) {
       throw new NotFoundException('Invalid credentials');
