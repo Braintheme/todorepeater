@@ -1,12 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { RepeatUnit } from '@modules/todo/enums/repeat-unit.enum';
-import { CategoryDto } from '@modules/category/dto/category.dto';
+import { CategoryShortDto } from '@modules/category/dto/category-short.dto';
 
 export class TodoDto {
   @ApiProperty({ example: 1, description: 'Todo id' })
   id: number;
 
-  @ApiProperty({ example: 'Sell sofa'})
+  @ApiProperty({ example: 'Sell sofa' })
   title: string;
 
   @ApiProperty({
@@ -42,10 +42,16 @@ export class TodoDto {
   })
   isCompleted: boolean;
 
+  // @ApiProperty({
+  //   type: () => CategoryDto,
+  //   nullable: true,
+  //   description: 'Linked category object',
+  // })
+  // category: CategoryDto | null;
   @ApiProperty({
-    type: () => CategoryDto,
-    nullable: true,
+    type: () => CategoryShortDto,
     description: 'Linked category object',
+    nullable: true,
   })
-  category: CategoryDto | null;
+  category: CategoryShortDto | null;
 }
