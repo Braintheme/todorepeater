@@ -1,16 +1,16 @@
-.PHONY: frontend-rebuild backend-rebuild all-rebuild clear
+.PHONY: fe-re be-re rebuild clear
 
-frontend-rebuild:
+fe-re:
 	docker compose down frontend
 	docker compose build frontend --no-cache
 	docker compose up -d frontend
 
-backend-rebuild:
+be-re:
 	docker compose down backend
 	docker compose build backend --no-cache
 	docker compose up -d backend
 
-all-rebuild:
+rebuild:
 	docker compose down
 	docker compose build --no-cache
 	docker compose up -d
