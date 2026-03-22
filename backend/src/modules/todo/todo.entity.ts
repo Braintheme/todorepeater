@@ -7,7 +7,6 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import { RepeatType } from '@modules/todo/enums/repeat-type.enum';
 import { UserEntity } from '@modules/user/user.entity';
 import { CategoryEntity } from '@modules/category/category.entity';
 import { RepeatUnit } from '@modules/todo/enums/repeat-unit.enum';
