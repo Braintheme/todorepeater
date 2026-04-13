@@ -5,9 +5,9 @@ services:
       context: ./backend
       target: dev
     ports:
-      - '3001:3000'
+      - '4000:4000'
     expose:
-      - '3000'
+      - '4000'
     command: ['sh', '-c', 'pnpm start:dev']
     volumes:
       - ./backend/src:/usr/src/backend/src
@@ -47,8 +47,6 @@ services:
       - '3000:3000'
     expose:
       - '3000'
-    environment:
-      NEXT_PUBLIC_API_URL: http://localhost:3001
     volumes:
       - ./frontend/src:/usr/src/frontend/src
       - ./frontend/public:/usr/src/frontend/public
