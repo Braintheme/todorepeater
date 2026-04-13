@@ -5,7 +5,7 @@ services:
       context: ./backend
       target: dev
     ports:
-      - '3000:3000'
+      - '3001:3000'
     expose:
       - '3000'
     command: ['sh', '-c', 'pnpm start:dev']
@@ -39,4 +39,19 @@ services:
     volumes:
       - ./docker/mysql/data:/var/lib/mysql
 
-  
+  frontend:
+    build:
+      context: ./frontend
+      target: dev
+    ports:
+      - '3000:3000'
+    expose:
+      - '3000'
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:3001
+    volumes:
+      - ./frontend/src:/usr/src/frontend/src
+      - ./frontend/public:/usr/src/frontend/public
+    depends_on:
+      - backend
+
