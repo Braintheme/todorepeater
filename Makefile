@@ -1,12 +1,21 @@
-.PHONY: fe-re be-re rebuild clear
+.PHONY: up down logs fe-re rebuild-frontend be-re rebuild clear
 
-fe-re:
-	docker compose down frontend
+up:
+	docker compose up -d
+
+down:
+	docker compose down
+
+logs:
+	docker compose logs -f
+
+fe-re rebuild-frontend:
 	docker compose build frontend --no-cache
-	docker compose up -d frontend
+	docker compose up -d --force-recreate --no-deps frontend
 
 be-re:
-	docker compose down backend
+	docker compose stop backend || true
+	docker compose rm -f backend || true
 	docker compose build backend --no-cache
 	docker compose up -d backend
 

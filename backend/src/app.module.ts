@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { getTypeOrmConfig } from '@common/config/typeorm.config';
 import { appModules } from '@common/common/modules';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -15,5 +16,6 @@ import { appModules } from '@common/common/modules';
     }),
     ...appModules,
   ],
+  controllers: [AppController],
 })
 export class AppModule {}

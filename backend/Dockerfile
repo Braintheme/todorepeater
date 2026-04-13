@@ -16,7 +16,7 @@ RUN pnpm build
 # Development
 FROM base as dev
 
-EXPOSE 3000
+EXPOSE 4000
 
 CMD ["pnpm", "start:dev"]
 
@@ -37,5 +37,7 @@ COPY package*.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile --prod
 
 COPY --from=base /usr/src/backend/dist ./dist
+
+EXPOSE 4000
 
 CMD ["node", "dist/src/main.js"]
