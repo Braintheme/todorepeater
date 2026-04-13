@@ -14,7 +14,7 @@ services:
     env_file:
       - ./backend/.env
     depends_on:
-      mysql:
+      postgres:
         condition: service_healthy
   mysql:
     image: mysql:8.4
@@ -38,6 +38,25 @@ services:
       - '3306'
     volumes:
       - ./docker/mysql/data:/var/lib/mysql
+
+  postgres:
+    image: postgres:16-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: todo
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: todo
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U todo -d todo']
+      interval: 3s
+      retries: 5
+      start_period: 10s
+    ports:
+      - '5432:5432'
+    expose:
+      - '5432'
+    volumes:
+      - ./docker/postgres/data:/var/lib/postgresql/data
 
   frontend:
     build:

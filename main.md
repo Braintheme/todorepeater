@@ -7,9 +7,12 @@ The frontend and backend use **different host ports** so they never clash with N
 | Frontend (Next.js) | [http://localhost:3000](http://localhost:3000) | UI only |
 | Backend (Nest) | [http://localhost:4000](http://localhost:4000) | REST API |
 | Swagger | [http://localhost:4000/api](http://localhost:4000/api) | API docs |
-| MySQL | `localhost:3306` | As defined in `docker-compose.yml` |
+| PostgreSQL | `localhost:5432` | Primary DB for the API (`DATABASE_URL` in `backend/.env`) |
+| MySQL | `localhost:3306` | Still started by Compose; the API does **not** use it unless you point `DATABASE_URL` at MySQL and switch the TypeORM driver back to `mysql` |
 
-The API port is set in `backend/.env` as `API_PORT` (the app defaults to **4000** in code if unset). In Docker, the backend container uses that port with mapping `4000:4000`.
+The API listen port is set in `backend/.env` as `API_PORT` (defaults to **4000** in code if unset). In Docker, the backend uses host mapping `4000:4000`.
+
+The database URL is `DATABASE_URL` (PostgreSQL in the default setup, e.g. `postgresql://todo:password@postgres:5432/todo` inside Compose). See `backend/.env.example`.
 
 Environment variables are documented in `backend/.env.example`. Copy it to `backend/.env` and adjust values before the first run.
 
